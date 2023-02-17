@@ -15,15 +15,15 @@ class scenario_commands():
         self.pos_x = 0
         self.pos_y = 0
         self.gfont = "consolas"
-        self.backgrounds = {"black":pygame.image.load("PGTE/engine_imgs/black_1366_768.png")}
+        self.backgrounds = {"black": pygame.image.load("engine_imgs/black_1366_768.png")}
         self.pfont = pygame.font.SysFont(self.gfont, 32)
         self.tfont = pygame.font.SysFont(self.gfont, 20)
         self.cfont = pygame.font.SysFont(self.gfont, 45)
-        self.choice_bg = pygame.image.load("PGTE/engine_imgs/choice_bg.png")
-        self.txt_bg = pygame.image.load("PGTE/engine_imgs/txt_bg.png")
+        self.choice_bg = pygame.image.load("engine_imgs/choice_bg.png")
+        self.txt_bg = pygame.image.load("engine_imgs/txt_bg.png")
         self.personages = dict()
         self.bg = "black"
-        self.cur_text = str
+        self.cur_text = ""
         self.pers_is_show = False
 
         # =============================================================================================================
@@ -45,6 +45,8 @@ class scenario_commands():
         # choice(choices) - создает выбор из choices и возвращает цифру в зависимости от выбора
         #
         # =============================================================================================================
+        #
+        # !!!ПОКА НЕ РАБОТАЕТ!!!
         # Условные знаки в тексте:
         #
         # ~p~ - пауза в диалоге
@@ -119,7 +121,7 @@ class scenario_commands():
                 screen.blit(blit_txt, (12, 680))
                 clock.tick(60)
                 pygame.display.flip()
-            print(clock.get_fps())
+            # print(clock.get_fps())
             i += 1
 
 
@@ -169,7 +171,7 @@ class scenario_commands():
         for txt in choices: # (768 - 17 * len(choices) - 2 * (n - 1)) // 2
             txt = self.cfont.render(txt, True, (185, 185, 185))
             choices_rects.append((pcenter + count, pcenter + count + 35))
-            print(pcenter + count)
+            # print(pcenter + count)
             screen.blit(self.choice_bg, (0, pcenter + count + 2))
             screen.blit(txt, (75, pcenter + count))
             count += 50
@@ -195,7 +197,7 @@ class personage():
         self.name = name
         self.color = color
         self.sprites = dict()
-        print(sprites)
+        # print(sprites)
         for key, value in sprites.items():
             if(key != "none" or value != "none"):
                 self.sprites[key] = pygame.image.load(value)
@@ -204,11 +206,11 @@ class personage():
 
 if(__name__ == "__main__"):
     x = scenario_commands()
-    x.init_music("data/music/vespercellos_all_go_to_plan.mp3", "all_go_to_plan_1")
-    print(x.musics)
-    x.play_music("all_go_to_plan_1")
+    x.init_music("data/music/quitemusic.mp3", "sample_muse_1")
+    # print(x.musics)
+    x.play_music("sample_muse_1")
     x.init_sound("data/sounds/dialog_click.mp3", "click_1")
-    print(x.sounds)
+    # print(x.sounds)
     x.play_sound("click_1")
     pygame.init()
     while pygame.event.wait().type != pygame.QUIT:
