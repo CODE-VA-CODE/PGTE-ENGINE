@@ -6,7 +6,7 @@ import pygame
 from configfile import screen, clock
 
 
-class scenario_commands():
+class ScenarioCommands:
     def __init__(self):
         self.sc_file = str()
         self.scenario = str()
@@ -83,7 +83,6 @@ class scenario_commands():
         self.bg = bg
         screen.blit(self.txt_bg, (0, 638))
 
-
     def init_bg(self, path, bg):
         self.backgrounds[bg] = pygame.image.load(path)
 
@@ -115,7 +114,7 @@ class scenario_commands():
                 pygame.display.flip()
             else:
                 screen.blit(self.backgrounds[self.bg], (0, 0))
-                screen.blit(self.personages[self.cur_pers].sprites[self.cur_pose], (self.pos_x, self.pos_y))
+                screen.blit(self.personages[self.cur_perses].sprites[self.cur_pose], (self.pos_x, self.pos_y))
                 screen.blit(self.txt_bg, (0, 638))
                 screen.blit(personage_txt, (35, 645))
                 screen.blit(blit_txt, (12, 680))
@@ -123,7 +122,6 @@ class scenario_commands():
                 pygame.display.flip()
             # print(clock.get_fps())
             i += 1
-
 
         blit_txt = self.tfont.render(text, True, (201, 201, 201))
         screen.blit(blit_txt, (12, 680))
@@ -142,11 +140,12 @@ class scenario_commands():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
     def show(self, pers, pose, pos_x=0, pos_y=0):
         self.pers_is_show = True
         self.pos_x = pos_x
         self.pos_y = pos_y
-        self.cur_pers = pers
+        self.cur_perses = pers
         self.cur_pose = pose
         screen.blit(self.backgrounds[self.bg], (0, 0))
         screen.blit(self.personages[pers].sprites[pose], (-15, -150))
@@ -162,13 +161,13 @@ class scenario_commands():
         pygame.display.flip()
 
     def pers_init(self, name, color, cn, sprites):
-        self.personages[cn] = personage(name, color, cn, sprites)
+        self.personages[cn] = Personage(name, color, cn, sprites)
 
     def choice(self, *choices):
         count = 0
         choices_rects = []
         pcenter = (768 - 45 * len(choices) - 5 * (len(choices) - 1)) // 2
-        for txt in choices: # (768 - 17 * len(choices) - 2 * (n - 1)) // 2
+        for txt in choices:  # (768 - 17 * len(choices) - 2 * (n - 1)) // 2
             txt = self.cfont.render(txt, True, (185, 185, 185))
             choices_rects.append((pcenter + count, pcenter + count + 35))
             # print(pcenter + count)
@@ -191,8 +190,7 @@ class scenario_commands():
                     sys.exit()
 
 
-
-class personage():
+class Personage:
     def __init__(self, name, color, cn, sprites):
         self.name = name
         self.color = color
@@ -205,7 +203,7 @@ class personage():
 
 
 if(__name__ == "__main__"):
-    x = scenario_commands()
+    x = ScenarioCommands()
     x.init_music("data/music/quitemusic.mp3", "sample_muse_1")
     # print(x.musics)
     x.play_music("sample_muse_1")

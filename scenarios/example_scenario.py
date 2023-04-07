@@ -1,12 +1,12 @@
 import pygame
 
-from engine import scenario_commands, personage
+from engine import ScenarioCommands, personage
 
 
-# sc_1 = scenario_commands()
+# sc_1 = ScenarioCommands()
 def scen_1_data_init():
     global sc_1
-    sc_1 = scenario_commands()
+    sc_1 = ScenarioCommands()
 
     bs_sprites = {"cl_eye_smile": "data/images/sprites/bs/cl_eye_smile_1.png",
                   "concern": "data/images/sprites/bs/concern_1.png",
@@ -17,6 +17,7 @@ def scen_1_data_init():
                   "sm_smile": "data/images/sprites/bs/sm_smile_1.png",
                   "unkindly": "data/images/sprites/bs/unkindly_1.png"}
     sc_1.pers_init("Босс", (215, 215, 215), "bs", bs_sprites)
+    sc_1.pers_init("Босс", (215, 215, 215), "bs1", bs_sprites)
     sc_1.init_music("data/music/quitemusic.mp3", "sample_music")
     sc_1.init_bg("data/images/bg/office_day.png", "office_1")
     sc_1.pers_init("Я", (215, 215, 215), "i", {"none": "none"})
@@ -32,4 +33,7 @@ def scenario_1():
     sc_1.show("bs", "one_eye_cl_smile", 450, 250)
     sc_1.tell("bs", "Прекрасно, пожалуй ещё включим музыку")
     sc_1.play_music("sample_music")
+    sc_1.tell("bs", "...")
+    sc_1.tell("bs", "А теперь я покажу тебе клонирование")
+    sc_1.show("bs1", "one_eye_cl_smile", 600, 250)
     sc_1.tell("bs", "...")
