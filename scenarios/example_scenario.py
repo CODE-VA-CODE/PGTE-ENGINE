@@ -1,6 +1,6 @@
 import pygame
 
-from engine import ScenarioCommands, personage
+from engine import ScenarioCommands, Personage
 
 
 # sc_1 = ScenarioCommands()

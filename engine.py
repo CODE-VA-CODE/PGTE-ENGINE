@@ -92,8 +92,14 @@ class ScenarioCommands:
         screen.blit(personage_txt, (35, 645))
         pygame.display.flip()
         running = True
-        i = 1
-        while running and i <= len(text):
+        i = 0
+        screen.blit(self.backgrounds[self.bg], (0, 0))
+        if(self.pers_is_show):
+            screen.blit(self.personages[self.cur_perses].sprites[self.cur_pose], (self.pos_x, self.pos_y))
+        screen.blit(self.txt_bg, (0, 638))
+        screen.blit(personage_txt, (35, 645))
+
+        while running and i < len(text):
             if pygame.key.get_pressed()[pygame.K_TAB]:
                 running = False
             for event in pygame.event.get():
@@ -105,21 +111,16 @@ class ScenarioCommands:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            blit_txt = self.tfont.render(text[:i], True, (201, 201, 201))
-            if(not self.pers_is_show):
-                self.bg_img(self.bg)
-                screen.blit(personage_txt, (35, 645))
-                screen.blit(blit_txt, (12, 680))
-                clock.tick(60)
-                pygame.display.flip()
-            else:
-                screen.blit(self.backgrounds[self.bg], (0, 0))
-                screen.blit(self.personages[self.cur_perses].sprites[self.cur_pose], (self.pos_x, self.pos_y))
-                screen.blit(self.txt_bg, (0, 638))
-                screen.blit(personage_txt, (35, 645))
-                screen.blit(blit_txt, (12, 680))
-                clock.tick(60)
-                pygame.display.flip()
+            blit_txt = self.tfont.render(text[i], True, (201, 201, 201))
+            screen.blit(blit_txt, (12 + (i * 11), 680))
+            clock.tick(60)
+            pygame.display.flip()
+            # else:
+            #     screen.blit(self.txt_bg, (0, 638))
+            #     screen.blit(personage_txt, (35, 645))
+            #     screen.blit(blit_txt, (12, 680))
+            #     clock.tick(60)
+            #     pygame.display.flip()
             # print(clock.get_fps())
             i += 1
 
