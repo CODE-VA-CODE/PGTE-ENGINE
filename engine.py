@@ -25,6 +25,7 @@ class ScenarioCommands:
         self.bg = "black"
         self.cur_text = ""
         self.pers_is_show = False
+        self.cur_perses = []
 
         # =============================================================================================================
         # Команды в файле сценария:
@@ -97,7 +98,9 @@ class ScenarioCommands:
         col_count = 0
         screen.blit(self.backgrounds[self.bg], (0, 0))
         if(self.pers_is_show):
-            screen.blit(self.personages[self.cur_perses].sprites[self.cur_pose], (self.pos_x, self.pos_y))
+            for i in self.cur_perses:
+                screen.blit(self.personages[i].sprites[self.personages[i].pose],
+                            (self.personages[i].pos_x, self.personages[i].pos_y))
         screen.blit(self.txt_bg, (0, 638))
         screen.blit(personage_txt, (35, 645))
 
@@ -153,12 +156,15 @@ class ScenarioCommands:
         self.pers_is_show = True
         self.pos_x = pos_x
         self.pos_y = pos_y
-        self.cur_perses = pers
-        self.cur_pose = pose
-        screen.blit(self.backgrounds[self.bg], (0, 0))
-        screen.blit(self.personages[pers].sprites[pose], (-15, -150))
-        screen.blit(self.txt_bg, (0, 638))
-        screen.blit(self.cur_text, (12, 680))
+        if(pers not in self.cur_perses):
+            self.cur_perses.append(pers)
+        self.personages[pers].pose = pose
+        self.personages[pers].pos_x = pos_x
+        self.personages[pers].pos_y = pos_y
+        # screen.blit(self.backgrounds[self.bg], (0, 0))
+        # screen.blit(self.personages[pers].sprites[pose], (-15, -150))
+        # screen.blit(self.txt_bg, (0, 638))
+        # screen.blit(self.cur_text, (12, 680))
         pygame.display.flip()
 
     def text_printing(self, text):
@@ -179,12 +185,15 @@ class ScenarioCommands:
         blit_txt = self.tfont.render(text, True, (201, 201, 201))
         return blit_txt
 
-    def hide(self):
-        self.pers_is_show = False
-        screen.blit(self.backgrounds[self.bg], (0, 0))
-        screen.blit(self.txt_bg, (0, 638))
-        screen.blit(self.cur_text, (12, 680))
-        pygame.display.flip()
+    def hide(self, pers):
+        self.cur_perses.remove(pers)
+        if(len(self.cur_perses) == 0):
+            self.pers_is_show = False
+
+        # screen.blit(self.backgrounds[self.bg], (0, 0))
+        # screen.blit(self.txt_bg, (0, 638))
+        # screen.blit(self.cur_text, (12, 680))
+        # pygame.display.flip()
 
     def pers_init(self, name, color, cn, sprites):
         self.personages[cn] = Personage(name, color, cn, sprites)
@@ -217,7 +226,7 @@ class ScenarioCommands:
 
 
 class Personage:
-    def __init__(self, name, color, cn, sprites):
+    def __init__(self, name, color, cn, sprites, pose=None, pos_x=0, pos_y=0):
         self.name = name
         self.color = color
         self.sprites = dict()
@@ -226,7 +235,9 @@ class Personage:
             if(key != "none" or value != "none"):
                 self.sprites[key] = pygame.image.load(value)
         self.code_name = cn
-
+        self.pose = pose
+        self.pos_x = pos_x
+        self.pos_y = pos_y
 
 if(__name__ == "__main__"):
     x = ScenarioCommands()

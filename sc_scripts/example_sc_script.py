@@ -25,7 +25,6 @@ def scen_1_data_init():
 
 def scenario_1():
     sc_1.tell("bs", "Hi, this is an example script")
-    sc_1.tell("bs", "1234567891123456892123456789312345678941234567895123456789612345678971234567898123456789912345678901234567891123456789212345678912345678911234568921234567893123456789412345678951234567896123456789712345678981234567899123456789012345678911234567892123456789")
     sc_1.show("bs", "one_eye_cl_smile", 450, 250)
     sc_1.tell("bs", "Just to show the capabilities of the engine")
     sc_1.show("bs", "cl_eye_smile", 450, 250)
@@ -38,3 +37,6 @@ def scenario_1():
     sc_1.tell("bs", "And now I'll show you cloning")
     sc_1.show("bs1", "one_eye_cl_smile", 600, 250)
     sc_1.tell("bs", "...")
+    sc_1.tell("bs", "Disappear")
+    sc_1.hide("bs1")
+    sc_1.tell("bs", "Right now, I control everything here")
