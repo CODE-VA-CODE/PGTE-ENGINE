@@ -92,14 +92,16 @@ class ScenarioCommands:
         screen.blit(personage_txt, (35, 645))
         pygame.display.flip()
         running = True
-        i = 0
+        txt_counter = 0
+        row_count = 0
+        col_count = 0
         screen.blit(self.backgrounds[self.bg], (0, 0))
         if(self.pers_is_show):
             screen.blit(self.personages[self.cur_perses].sprites[self.cur_pose], (self.pos_x, self.pos_y))
         screen.blit(self.txt_bg, (0, 638))
         screen.blit(personage_txt, (35, 645))
 
-        while running and i < len(text):
+        while running and txt_counter < len(text):
             if pygame.key.get_pressed()[pygame.K_TAB]:
                 running = False
             for event in pygame.event.get():
@@ -111,8 +113,12 @@ class ScenarioCommands:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            blit_txt = self.tfont.render(text[i], True, (201, 201, 201))
-            screen.blit(blit_txt, (12 + (i * 11), 680))
+            if(row_count > 122):
+                row_count = 0
+                col_count += 1
+
+            blit_txt = self.tfont.render(text[txt_counter], True, (201, 201, 201))
+            screen.blit(blit_txt, (12 + (row_count * 11), 680 + (col_count * 20)))
             clock.tick(60)
             pygame.display.flip()
             # else:
@@ -122,12 +128,13 @@ class ScenarioCommands:
             #     clock.tick(60)
             #     pygame.display.flip()
             # print(clock.get_fps())
-            i += 1
+            txt_counter += 1
+            row_count += 1
 
-        blit_txt = self.tfont.render(text, True, (201, 201, 201))
-        screen.blit(blit_txt, (12, 680))
-        pygame.display.flip()
-        self.cur_text = blit_txt
+        # blit_txt = self.tfont.render(text, True, (201, 201, 201))
+        # screen.blit(blit_txt, (12, 680))
+        # pygame.display.flip()
+        self.cur_text = self.text_printing(text)
         running = True
         while running:
             if pygame.key.get_pressed()[pygame.K_TAB]:
@@ -153,6 +160,24 @@ class ScenarioCommands:
         screen.blit(self.txt_bg, (0, 638))
         screen.blit(self.cur_text, (12, 680))
         pygame.display.flip()
+
+    def text_printing(self, text):
+        if(len(text) > 122):
+            rows = len(text) // 122 + 1
+        else:
+            blit_txt = self.tfont.render(text, True, (201, 201, 201))
+            screen.blit(blit_txt, (12, 680))
+            pygame.display.flip()
+
+            return blit_txt
+
+        for i in range(rows):
+            blit_txt = self.tfont.render(text[122*i:122*(i+1)], True, (201, 201, 201))
+            screen.blit(blit_txt, (12, 680 + (i * 20)))
+        pygame.display.flip()
+
+        blit_txt = self.tfont.render(text, True, (201, 201, 201))
+        return blit_txt
 
     def hide(self):
         self.pers_is_show = False

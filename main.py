@@ -1,6 +1,6 @@
 import pygame
 
-from scenarios.example_scenario import scenario_1, scen_1_data_init
+from sc_scripts.example_sc_script import scenario_1, scen_1_data_init
 
 
 def run():

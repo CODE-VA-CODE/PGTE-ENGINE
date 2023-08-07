@@ -16,24 +16,25 @@ def scen_1_data_init():
                   "sigh": "data/images/sprites/bs/sigh_1.png",
                   "sm_smile": "data/images/sprites/bs/sm_smile_1.png",
                   "unkindly": "data/images/sprites/bs/unkindly_1.png"}
-    sc_1.pers_init("Босс", (215, 215, 215), "bs", bs_sprites)
-    sc_1.pers_init("Босс", (215, 215, 215), "bs1", bs_sprites)
+    sc_1.pers_init("Ceo", (215, 215, 215), "bs", bs_sprites)
+    sc_1.pers_init("Ceo", (215, 215, 215), "bs1", bs_sprites)
     sc_1.init_music("data/music/quitemusic.mp3", "sample_music")
     sc_1.init_bg("data/images/bg/office_day.png", "office_1")
-    sc_1.pers_init("Я", (215, 215, 215), "i", {"none": "none"})
+    sc_1.pers_init("I", (215, 215, 215), "i", {"none": "none"})
     sc_1.pers_init("", (213, 213, 213), "na", {"none": "none"})  # рассказчик/просто описание происходящего
 
 def scenario_1():
-    sc_1.tell("bs", "Привет, это пример сценария")
+    sc_1.tell("bs", "Hi, this is an example script")
+    sc_1.tell("bs", "1234567891123456892123456789312345678941234567895123456789612345678971234567898123456789912345678901234567891123456789212345678912345678911234568921234567893123456789412345678951234567896123456789712345678981234567899123456789012345678911234567892123456789")
     sc_1.show("bs", "one_eye_cl_smile", 450, 250)
-    sc_1.tell("bs", "Просто чтобы показать возможности движка")
+    sc_1.tell("bs", "Just to show the capabilities of the engine")
     sc_1.show("bs", "cl_eye_smile", 450, 250)
-    sc_1.tell("bs", "А для этого давай переместимся в более приятное место")
+    sc_1.tell("bs", "And for that, let's move to a nicer place")
     sc_1.bg_img("office_1")
     sc_1.show("bs", "one_eye_cl_smile", 450, 250)
-    sc_1.tell("bs", "Прекрасно, пожалуй ещё включим музыку")
+    sc_1.tell("bs", "Fine, let's turn on the music")
     sc_1.play_music("sample_music")
     sc_1.tell("bs", "...")
-    sc_1.tell("bs", "А теперь я покажу тебе клонирование")
+    sc_1.tell("bs", "And now I'll show you cloning")
     sc_1.show("bs1", "one_eye_cl_smile", 600, 250)
     sc_1.tell("bs", "...")
